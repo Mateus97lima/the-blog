@@ -1,13 +1,17 @@
-import { postRepository } from '@/repositories/Post';
+
+
 import { PostCoverImagem } from '../PostCoverImage';
-import { PostHeading } from '../PostHeading';
+import { PostSumary } from '../PostSumaary';
+import { findAllPublicPosts } from '@/LIb/post/queries';
 
 export async function PostsList() {
-  const posts = await postRepository.findAll();
+ const posts = await findAllPublicPosts();
 
   return (
     <div className='grid grid-cols-1 gap-5  sm:grid-cols-2 lg:grid-cols-3'>
-      {posts.map(post => {
+      {posts.slice(1).map(post => {
+        const postLink = `/post/${post.slug}`;
+
         return (
           <div className='flex flex-col group gap-5' key={post.id}>
             <PostCoverImagem
@@ -19,17 +23,16 @@ export async function PostsList() {
                 priority: true,
               }}
               linkProps={{
-                href: `/post/${post.slug}`,
+                href: postLink,
               }}
             />
-                  <div className=' flex flex-col gap-4 sm:justify-center'>
-                        <time className='text-slate-600 block text-sm/tight' dateTime={post.createdAt}>{post.createdAt}</time>
-
-                      <PostHeading as='h2' url='#'>{post.title}</PostHeading>
-
-                      <p>{post.excerpt}
-                      </p>
-                    </div>
+            <PostSumary
+              postLink={postLink}
+              postHeading='h2'
+              title={post.title}
+              createdAt={post.createdAt}
+              excerpt={post.excerpt}
+            />
           </div>
         );
       })}

@@ -8,7 +8,7 @@ export function Header(){
         'sm:text-5xl/normal sm:py-10',
         'md:text-6xl/normal py-12',
         'lg:text-7xl/normal py-15')}>
-            <Link href="#">The Blog</Link>
+            <Link href="/">The Blog</Link>
         </h1>
     )
 }

@@ -1,24 +1,32 @@
 
-import { FormatDateTime, FormatRelativeDate } from "../../../utils/Format-datetime";
-import { PostHeading } from "../PostHeading";
+
+import { PostDate } from '../PostDate';
+import { PostHeading } from '../PostHeading';
 
 type PostSumaryProps = {
-postHeading: 'h1'|'h2';
-postLink:string;
-title:string;
-createdAt:string;
-excerpt:string;
-}
+  postHeading: 'h1' | 'h2';
+  postLink: string;
+  title: string;
+  createdAt: string;
+  excerpt: string;
+};
 
-export function PostSumary({postHeading,postLink,createdAt,title,excerpt}:PostSumaryProps){
-    return(
-         <div className=' flex flex-col gap-4 sm:justify-center'>
-                                <time title={FormatRelativeDate(createdAt)} className='text-slate-600 block text-sm/tight' dateTime={createdAt}>{FormatDateTime(createdAt)}</time>
+export function PostSumary({
+  postHeading,
+  postLink,
+  createdAt,
+  title,
+  excerpt,
+}: PostSumaryProps) {
+  return (
+    <div className=' flex flex-col gap-4 sm:justify-center'>
+      <PostDate dateTime={createdAt}/>
 
-                              <PostHeading as={postHeading} url={postLink}>{title}</PostHeading>
+      <PostHeading as={postHeading} url={postLink}>
+        {title}
+      </PostHeading>
 
-                              <p>{excerpt}
-                              </p>
-                            </div>
-    )
+      <p>{excerpt}</p>
+    </div>
+  );
 }

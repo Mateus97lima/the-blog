@@ -31,13 +31,21 @@ export class JsonPostRepository implements PostRepository {
 
     const posts = await this.readFromDisk();
     return posts.filter((post: { published: true; }) => post.published);
-  }
+  };
 
   async findById(id: string): Promise<PostModel> {
     const posts = await this.findAllPublic();
     const post = posts.find(post => post.id === id);
 
-    if (!post) throw new Error('pagina não encontrada');
+    if (!post) throw new Error('pagina não encontrada para id');
     return post;
-  }
-}
+  };
+
+   async findBySlug(slug: string): Promise<PostModel> {
+    const posts = await this.findAllPublic();
+    const post = posts.find(post => post.slug === slug);
+
+    if (!post) throw new Error('pagina não encontrada para slug');
+    return post;
+  };
+};

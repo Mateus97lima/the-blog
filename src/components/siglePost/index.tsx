@@ -2,6 +2,7 @@ import { findPostBySlugCached } from "@/LIb/post/queries";
 import Image from "next/image";
 import { PostHeading } from "../PostHeading";
 import { PostDate } from "../PostDate";
+import { SafeMarkDown } from "../SafeMarkDown";
 
 type SinglePostProps = {
     slug:string
@@ -24,7 +25,7 @@ return(
         <p>{post.author} | <PostDate dateTime={post.createdAt}/></p>
         </header>
         <p className="text-xl mb-6">{post.excerpt}</p>
-        <div>{post.content}</div>
+       <SafeMarkDown markdown={post.content}/>
      </article>
     )
 }

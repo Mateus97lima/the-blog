@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "7fc2f469-ee10-4fa5-abdf-175bb5679cb5",
+  "id": "daf7ebd9-0f71-48b7-ae96-504b8f52727c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "posts": {
@@ -42,8 +42,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "coverImageUrl": {
-          "name": "coverImageUrl",
+        "cover_image_url": {
+          "name": "cover_image_url",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -51,7 +51,7 @@
         },
         "published": {
           "name": "published",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -65,6 +65,13 @@
         },
         "updatedAt": {
           "name": "updatedAt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "content": {
+          "name": "content",
           "type": "text",
           "primaryKey": false,
           "notNull": true,

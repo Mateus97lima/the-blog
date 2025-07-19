@@ -4,10 +4,11 @@ CREATE TABLE `posts` (
 	`title` text NOT NULL,
 	`author` text NOT NULL,
 	`excerpt` text NOT NULL,
-	`coverImageUrl` text NOT NULL,
-	`published` text NOT NULL,
+	`cover_image_url` text NOT NULL,
+	`published` integer NOT NULL,
 	`createdAt` integer NOT NULL,
-	`updatedAt` text NOT NULL
+	`updatedAt` text NOT NULL,
+	`content` text NOT NULL
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `posts_slug_unique` ON `posts` (`slug`);

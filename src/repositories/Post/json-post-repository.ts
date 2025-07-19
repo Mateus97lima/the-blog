@@ -13,12 +13,12 @@ const JSON_POSTS_FILE_PATH = resolve(
 );
 const SIMULATE_WAIT_IN_MS = 0;
 export class JsonPostRepository implements PostRepository {
-    static findAll() {
-        throw new Error("Method not implemented.");
-    }
-    static findAllPublic() {
-        throw new Error("Method not implemented.");
-    }
+  static findAll() {
+    throw new Error('Method not implemented.');
+  }
+  static findAllPublic() {
+    throw new Error('Method not implemented.');
+  }
   private async simulateWait() {
     if (SIMULATE_WAIT_IN_MS <= 0) return;
 
@@ -36,17 +36,17 @@ export class JsonPostRepository implements PostRepository {
     await this.simulateWait();
 
     const posts = await this.readFromDisk();
-    return posts.filter((post: { published: true; }) => post.published);
-  };
+    return posts.filter((post: { published: true }) => post.published);
+  }
 
-   async findAll(): Promise<PostModel[]> {
+  async findAll(): Promise<PostModel[]> {
     await this.simulateWait();
 
-    console.log('\n', 'findAll', '\n')
+    console.log('\n', 'findAll', '\n');
 
     const posts = await this.readFromDisk();
-    return posts
-  };
+    return posts;
+  }
 
   async findById(id: string): Promise<PostModel> {
     const posts = await this.findAllPublic();
@@ -54,13 +54,13 @@ export class JsonPostRepository implements PostRepository {
 
     if (!post) throw new Error('pagina não encontrada para id');
     return post;
-  };
+  }
 
-   async findBySlug(slug: string): Promise<PostModel> {
+  async findBySlugPublic(slug: string): Promise<PostModel> {
     const posts = await this.findAllPublic();
     const post = posts.find(post => post.slug === slug);
 
     if (!post) throw new Error('pagina não encontrada para slug');
     return post;
-  };
-};
+  }
+}

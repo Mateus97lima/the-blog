@@ -13,6 +13,12 @@ const JSON_POSTS_FILE_PATH = resolve(
 );
 const SIMULATE_WAIT_IN_MS = 0;
 export class JsonPostRepository implements PostRepository {
+    static findAll() {
+        throw new Error("Method not implemented.");
+    }
+    static findAllPublic() {
+        throw new Error("Method not implemented.");
+    }
   private async simulateWait() {
     if (SIMULATE_WAIT_IN_MS <= 0) return;
 
@@ -31,6 +37,15 @@ export class JsonPostRepository implements PostRepository {
 
     const posts = await this.readFromDisk();
     return posts.filter((post: { published: true; }) => post.published);
+  };
+
+   async findAll(): Promise<PostModel[]> {
+    await this.simulateWait();
+
+    console.log('\n', 'findAll', '\n')
+
+    const posts = await this.readFromDisk();
+    return posts
   };
 
   async findById(id: string): Promise<PostModel> {

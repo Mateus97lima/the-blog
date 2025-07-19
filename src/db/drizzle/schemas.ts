@@ -12,7 +12,7 @@ author:text('author').notNull(),
 excerpt:text('excerpt').notNull(),
 coverImageUrl:text('cover_image_url').notNull(),
 published:integer('published',{ mode:'boolean'}).notNull(),
-createdAt:integer('createdAt',{mode:'boolean'}).notNull(),
+createdAt:text('createdAt').notNull(),
 updatedAt:text('updatedAt').notNull(),
 content:text('content').notNull(),
 });

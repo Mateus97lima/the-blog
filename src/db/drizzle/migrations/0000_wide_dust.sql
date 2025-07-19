@@ -6,7 +6,7 @@ CREATE TABLE `posts` (
 	`excerpt` text NOT NULL,
 	`cover_image_url` text NOT NULL,
 	`published` integer NOT NULL,
-	`createdAt` integer NOT NULL,
+	`createdAt` text NOT NULL,
 	`updatedAt` text NOT NULL,
 	`content` text NOT NULL
 );

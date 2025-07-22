@@ -6,6 +6,9 @@ import { findAllPublicPostsCached } from '@/LIb/post/queries';
 
 export async function PostFeatured() {
  const posts = await findAllPublicPostsCached();
+
+
+
   const post = posts[0]
 
   const postLink = `/post/${post.slug}`;

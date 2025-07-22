@@ -42,7 +42,7 @@ export class JsonPostRepository implements PostRepository {
   async findAll(): Promise<PostModel[]> {
     await this.simulateWait();
 
-    console.log('\n', 'findAll', '\n');
+    
 
     const posts = await this.readFromDisk();
     return posts;

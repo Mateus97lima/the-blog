@@ -11,9 +11,20 @@ locale:ptBR
 export function FormatRelativeDate(rawDate:string):string{
 const date = new Date(rawDate);
 
+
+
 return formatDistanceToNow(date,{
 locale:ptBR,
 addSuffix:true
+})
+}
+export function FormatHours(id:number):string{
+const date = new Date(id);
+
+
+
+return format(date," HH'h'ss",{
+locale:ptBR
 })
 }
 

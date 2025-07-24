@@ -4,6 +4,8 @@ import {findPostBySlugCached} from '@/LIb/post/queries';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
+ export const dynamic = 'force-static'
+
 type PostSlugPageProps = {
   params: Promise<{ slug: string }>;
 };
@@ -28,6 +30,8 @@ export async function generateMetadata({
 
 export default async function PostSlugPage({ params }: PostSlugPageProps) {
   const { slug } = await params;
+
+
 
   return (
     <Suspense fallback={<SpinLoader className='min-h-20 mb-16' />}>

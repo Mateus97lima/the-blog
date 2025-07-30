@@ -1,15 +1,12 @@
-
 import { PostCoverImagem } from '../PostCoverImage';
 
 import { PostSumary } from '../PostSumaary';
-import { findAllPublicPostsCached } from '@/LIb/post/queries';
+import { findAllPublicPostsCached } from '@/LIb/post/queries/public';
 
 export async function PostFeatured() {
- const posts = await findAllPublicPostsCached();
+  const posts = await findAllPublicPostsCached();
 
-
-
-  const post = posts[0]
+  const post = posts[0];
 
   const postLink = `/post/${post.slug}`;
 
@@ -33,9 +30,7 @@ export async function PostFeatured() {
         postHeading='h1'
         title={post.title}
         createdAt={post.createdAt}
-        excerpt={
-          post.excerpt
-        }
+        excerpt={post.excerpt}
       />
     </section>
   );

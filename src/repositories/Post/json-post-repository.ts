@@ -2,6 +2,7 @@ import { PostModel } from '@/models/post/Post-Model';
 import { PostRepository } from './Post-Repository';
 import { resolve } from 'path';
 import { readFile } from 'fs/promises';
+import { logColor } from '../../../utils/log-color';
 
 const Rood_Dir = process.cwd();
 const JSON_POSTS_FILE_PATH = resolve(
@@ -11,7 +12,7 @@ const JSON_POSTS_FILE_PATH = resolve(
   'seed',
   'posts.json',
 );
-const SIMULATE_WAIT_IN_MS = 0;
+const SIMULATE_WAIT_IN_MS = 100;
 export class JsonPostRepository implements PostRepository {
   static findAll() {
     throw new Error('Method not implemented.');
@@ -34,6 +35,7 @@ export class JsonPostRepository implements PostRepository {
 
   async findAllPublic(): Promise<PostModel[]> {
     await this.simulateWait();
+    logColor('findAllPublic', Date.now())
 
     const posts = await this.readFromDisk();
     return posts.filter((post: { published: true }) => post.published);
@@ -41,22 +43,26 @@ export class JsonPostRepository implements PostRepository {
 
   async findAll(): Promise<PostModel[]> {
     await this.simulateWait();
+    logColor('findAll', Date.now())
 
-    
+
 
     const posts = await this.readFromDisk();
     return posts;
   }
 
   async findById(id: string): Promise<PostModel> {
+    logColor('findById', Date.now())
     const posts = await this.findAllPublic();
     const post = posts.find(post => post.id === id);
+
 
     if (!post) throw new Error('pagina não encontrada para id');
     return post;
   }
 
   async findBySlugPublic(slug: string): Promise<PostModel> {
+    logColor('findBySlugPublic', Date.now())
     const posts = await this.findAllPublic();
     const post = posts.find(post => post.slug === slug);
 

@@ -1,17 +1,21 @@
-
-import { findAllPostAdmin } from '@/LIb/post/queries/admin';
+import { findAllPostAdmin } from '@/lib/post/queries/admin';
 import clsx from 'clsx';
 
-
 import Link from 'next/link';
-import { AdminButtonDelete } from '../Admin/AdminButtonDelete';
-
+import { AdminButtonDelete } from '../AdminButtonDelete';
+import ErrorMessage from '../../ErrorMessage';
 
 export async function PostsListAdmin() {
-  const post = await findAllPostAdmin();
+  const posts = await findAllPostAdmin();
+
+  console.log('POSTS', posts);
+
+  if (posts.length <= 0)
+    return <ErrorMessage contentTitle='ei' content='Bora criar algum post' />;
+
   return (
     <div className='mb-16 text-3xl '>
-      {post.map(post => {
+      {posts.map(post => {
         return (
           <div
             className={clsx(
@@ -28,11 +32,13 @@ export async function PostsListAdmin() {
                 (post não publicado)
               </span>
             )}
-    <AdminButtonDelete id={post.id} title={post.title}></AdminButtonDelete>
+            <AdminButtonDelete
+              id={post.id}
+              title={post.title}
+            ></AdminButtonDelete>
           </div>
         );
       })}
-     
     </div>
   );
 }

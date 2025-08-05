@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "ebce86f1-ff6f-4da3-b8ec-f305f291c396",
+  "id": "0b08a3b4-8bf4-431e-8c0a-d4ca46e08c6b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "posts": {

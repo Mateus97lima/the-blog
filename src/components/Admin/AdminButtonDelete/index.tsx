@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { Trash2Icon } from 'lucide-react';
 
 import { useState, useTransition } from 'react';
+import { toast,  } from 'react-toastify';
 
 type adminButtonDeleteProps = {
   id: string;
@@ -25,12 +26,20 @@ setShowDialog(true)
   }
 
   function handleConfirm (){
+    toast.dismiss();
 startTransition(async () => {
      const result = await deletePostAction(id);
-       alert(` o result e : ${result}`);
+      setShowDialog(false)
+
+     if(result.error){
+       toast.error(result.error);
+       return;
+     }
+     toast.success('Post Apagando com sucesso')
      });
-     setShowDialog(false)
+
   }
+
   return (
     <>
     <button

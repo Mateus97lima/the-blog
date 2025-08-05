@@ -3,7 +3,7 @@
 type AdminIdnPageProps = {
     params:Promise<{
         id: string
-    }>
+    }>;
 }
 
 

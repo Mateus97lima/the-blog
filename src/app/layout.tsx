@@ -4,6 +4,7 @@ import './globals.css';
 import { Container } from '@/components/Container';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -31,6 +32,7 @@ export default function RootLayout({
 
        <Footer/>
         </Container>
+        <ToastContainer position='top-center' className={'text-[1.1rem]'}/>
       </body>
     </html>
   );

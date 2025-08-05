@@ -12,7 +12,7 @@ const JSON_POSTS_FILE_PATH = resolve(
   'seed',
   'posts.json',
 );
-const SIMULATE_WAIT_IN_MS = 100;
+const  SIMULATE_WAIT_IN_MS = 100;
 export class JsonPostRepository implements PostRepository {
   static findAll() {
     throw new Error('Method not implemented.');

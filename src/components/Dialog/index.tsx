@@ -1,6 +1,7 @@
 
 
 import clsx from 'clsx';
+import { Button } from '../Button';
 
 type DialogProps = {
     isVisible?:boolean;
@@ -44,26 +45,20 @@ export function Dialog({ isVisible = false,title,content,onCancel,onConfirm,disa
          {content}
         </div>
         <div className='flex items-center justify-around'>
-          <button
-            className={clsx(
-              'bg-slate-300 hover:bg-slate-400 transition text-slate-900 flex items-center justify-center py-2 px-4 rounded-lg cursor-pointer',
-            'disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed')}
+          <Button variant='ghost'
             autoFocus
             onClick={handlCancel}
             disabled={disabled}
           >
             Cancelar
-          </button>
-          <button
-            className={clsx(
-              'bg-blue-500 hover:bg-blue-600 transition text-blue-300 flex items-center justify-center py-2 px-4 rounded-lg cursor-pointer','disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed'
-            )}
+          </Button>
+          <Button variant='default'
             autoFocus
             onClick={onConfirm}
             disabled={disabled}
           >
             Ok
-          </button>
+          </Button>
         </div>
       </div>
     </div>

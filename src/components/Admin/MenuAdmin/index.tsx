@@ -69,9 +69,9 @@ export function MenuAdmin() {
         Posts
       </Link>
 
-        <Link className={linkClasses} href='/admin/post'>
+        <Link className={linkClasses} href='/admin/post/new'>
         <PlusIcon/>
-        Posts
+        Criar post
       </Link>
 
       </nav>

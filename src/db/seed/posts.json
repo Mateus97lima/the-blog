@@ -14,15 +14,15 @@
     },
     {
       "id": "afa086e4-53e4-492d-acf2-7c2966d83fcd",
-      "title": "Dicas para manter a saúde mental em dia",
+      "title": "Dicas para manter a saúde mental",
       "slug": "dicas-para-manter-a-saude-mental-em-dia",
       "excerpt": "Em vez de configurar tudo manualmente, basta criar um arquivo com o nome certo e o Next.js entende que aquilo representa uma página.",
       "content": "Em vez de configurar tudo manualmente, basta criar um arquivo com o nome certo e o Next.js entende que aquilo representa uma página.",
       "coverImageUrl": "/images/bryen_6.png",
       "published": true,
       "createdAt": "2025-04-07T00:24:38.616Z",
-      "updatedAt": "2025-04-07T00:33:56.907Z",
-      "author": "Marina Duarte"
+      "updatedAt": "2025-08-26T22:39:45.057Z",
+      "author": "Marina Duar"
     },
     {
       "id": "1b6a5f57-8a19-4933-91f4-1af678464ded",
@@ -119,6 +119,18 @@
       "createdAt": "2025-01-07T22:54:10",
       "updatedAt": "2025-01-07T22:54:10",
       "author": "Carla Mendes"
+    },
+    {
+      "title": "lskldklaksal",
+      "content": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "author": "Pedro Martins",
+      "excerpt": "O Next.js também é uma boa escolha para quem quer se preocupar com performance e SEO.",
+      "coverImageUrl": "http://localhost:3000/uploads/1756248020111.png",
+      "published": true,
+      "createdAt": "2025-08-26T22:40:32.434Z",
+      "updatedAt": "2025-08-26T22:40:35.058Z",
+      "id": "05147680-44ef-46f9-8946-c15db60db2e4",
+      "slug": "lskldklaksal-q98dhe "
     }
   ]
 }

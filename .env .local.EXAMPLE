@@ -1,0 +1,9 @@
+#Simula a demorar das consultas na base de dados;
+SIMULATE_WAIT_IN_MS=0;
+#Tamanho maximo de upload de imagens bytes
+NEXT_PUBLiC_IMAGE_UPLOADER_MAX_SIZE=921600;
+#Nome da pasta onde  as imagens são salvas
+IMAGE_UPLOAD_DIRECTORY='uploads'
+#URL completa do servidor de imagens sem barra final
+IMAGE_SERVER_URL='http://localhost:3000/uploads';
+

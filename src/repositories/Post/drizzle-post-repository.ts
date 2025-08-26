@@ -2,15 +2,16 @@ import { PostModel } from '@/models/post/Post-Model';
 import { PostRepository } from './Post-Repository';
 import { drizzleDb } from '@/db/drizzle';
 import { asyncDelay } from '../../../utils/async-delay';
-import { SIMULATE_WAIT_IN_MS } from '@/lib/post/queries/constants';
 import { postsTable } from '@/db/drizzle/schemas';
 import { eq } from 'drizzle-orm';
 
+const SimulateWaitMs = Number(process.env.SIMULATE_WAIT_IN_MS) || 0;
+
 export class DrizzlePostRepository implements PostRepository {
   async findAllPublic(): Promise<PostModel[]> {
-    await asyncDelay(SIMULATE_WAIT_IN_MS, true);
+    await asyncDelay(SimulateWaitMs, true);
 
-    console.log('\n', 'findAllPublic', '\n');
+
 
     const posts = await drizzleDb.query.posts.findMany({
       orderBy: (posts, { desc }) => desc(posts.createdAt),
@@ -21,9 +22,9 @@ export class DrizzlePostRepository implements PostRepository {
   }
 
   async findBySlugPublic(slug: string): Promise<PostModel> {
-    await asyncDelay(SIMULATE_WAIT_IN_MS, true);
+    await asyncDelay(SimulateWaitMs, true);
 
-    console.log('\n', 'findBySlugPublic', '\n');
+
 
     const post = await drizzleDb.query.posts.findFirst({
       where: (posts, { eq, and }) =>
@@ -34,20 +35,20 @@ export class DrizzlePostRepository implements PostRepository {
   }
 
   async findAll(): Promise<PostModel[]> {
-    await asyncDelay(SIMULATE_WAIT_IN_MS, true);
+    await asyncDelay(SimulateWaitMs, true);
 
 
 
     const posts = await drizzleDb.query.posts.findMany({
       orderBy: (posts, { desc }) => desc(posts.createdAt),
     });
-      console.log('\n', 'findAll', posts, '\n');
+
     return posts;
   }
 
   async findById(id: string): Promise<PostModel> {
-    await asyncDelay(SIMULATE_WAIT_IN_MS, true);
-    console.log('\n', 'findById', '\n');
+    await asyncDelay(SimulateWaitMs, true);
+
 
     const post = await drizzleDb.query.posts.findFirst({
       where: (posts, { eq }) => eq(posts.id, id),
@@ -55,18 +56,21 @@ export class DrizzlePostRepository implements PostRepository {
     if (!post) throw new Error('pagina não encontrada para id');
     return post;
   }
-   async create(post:PostModel ):Promise<PostModel> {
-  const postExists =  await drizzleDb.query.posts.findFirst({
-    where:(post,{or,eq}) =>
-        or(eq(post.id, post.id), eq(post.slug,post.slug)),
-    columns:{id:true},
-  })
-  if(!!postExists){
-    throw new Error ('Post com ID ou Slug já existe na base de dados')
+ async create(newPost: PostModel): Promise<PostModel> {
+  const postExists = await drizzleDb.query.posts.findFirst({
+    where: (posts, { or, eq }) =>
+      or(eq(posts.id, newPost.id), eq(posts.slug, newPost.slug)),
+    columns: { id: true },
+  });
+
+  if (postExists) {
+    throw new Error('Post com ID ou Slug já existe na base de dados');
   }
-  await drizzleDb.insert(postsTable).values(post)
-  return post;
-   }
+
+  await drizzleDb.insert(postsTable).values(newPost);
+  return newPost;
+}
+
 
   async delete(id: string): Promise<PostModel> {
     const post = await drizzleDb.query.posts.findFirst({

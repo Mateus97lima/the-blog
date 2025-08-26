@@ -66,9 +66,10 @@ return {
     formState:newPost,
     errors:['Error desconhecido']
 }
+
 }
 
-
+console.log('criado com sucesso')
  revalidateTag('post')
  redirect(`/admin/post/${newPost.id}?create=1`)
 

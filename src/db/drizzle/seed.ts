@@ -4,7 +4,7 @@ import { postsTable } from "./schemas";
 
 (async () => {
     try {
-        console.log("🔄 Iniciando migração de posts...");
+
 
         const jsonPostRepository = new JsonPostRepository();
         const posts = await jsonPostRepository.findAll();
@@ -14,14 +14,14 @@ import { postsTable } from "./schemas";
             return;
         }
 
-        console.log(`📚 ${posts.length} posts encontrados no JSON.`);
+
 
         await drizzleDb.transaction(async (tx) => {
             await tx.delete(postsTable);
-            console.log("🧹 Posts antigos removidos.");
+            
 
             await tx.insert(postsTable).values(posts);
-            console.log("✅ Posts migrados com sucesso!");
+
         });
 
     } catch (error) {

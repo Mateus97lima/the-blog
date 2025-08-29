@@ -88,7 +88,7 @@ export function ManagePostForm(props: ManagePostFormProps) {
     <form action={action} className='mb-16'>
       <div className='flex flex-col gap-6'>
         <InputText
-          labeltext='ID'
+          labelText='ID'
           name='id'
           placeholder='ID gerado automaticamente'
           type='text'
@@ -98,7 +98,7 @@ export function ManagePostForm(props: ManagePostFormProps) {
         />
 
         <InputText
-          labeltext='Slug'
+          labelText='Slug'
           name='slug'
           placeholder='Slug gerado automaticamente'
           type='text'
@@ -108,7 +108,7 @@ export function ManagePostForm(props: ManagePostFormProps) {
         />
 
         <InputText
-          labeltext='Autor'
+          labelText='Autor'
           name='author'
           placeholder='Digite o nome do autor'
           type='text'
@@ -117,7 +117,7 @@ export function ManagePostForm(props: ManagePostFormProps) {
         />
 
         <InputText
-          labeltext='Título'
+          labelText='Título'
           name='title'
           placeholder='Digite o título'
           type='text'
@@ -126,7 +126,7 @@ export function ManagePostForm(props: ManagePostFormProps) {
         />
 
         <InputText
-          labeltext='Excerto'
+          labelText='Excerto'
           name='excerpt'
           placeholder='Digite o resumo'
           type='text'
@@ -145,7 +145,7 @@ export function ManagePostForm(props: ManagePostFormProps) {
         <ImageUploader disabled={isPending} />
 
         <InputText
-          labeltext='URL da imagem de capa'
+          labelText='URL da imagem de capa'
           name='coverImageUrl'
           placeholder='Digite a URL da imagem'
           type='text'

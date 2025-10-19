@@ -1,7 +1,7 @@
 import { PostModel } from '@/models/post/Post-Model';
 import { PostRepository } from './Post-Repository';
 import { drizzleDb } from '@/db/drizzle';
-import { asyncDelay } from '../../../utils/async-delay';
+import { asyncDelay } from '../../utils/async-delay';
 import { postsTable } from '@/db/drizzle/schemas';
 import { eq } from 'drizzle-orm';
 

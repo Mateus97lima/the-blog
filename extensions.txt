@@ -1,0 +1,10 @@
+anseki.vscode-color
+dracula-theme.theme-dracula
+esbenp.prettier-vscode
+fallenmax.mithril-emmet
+ms-azuretools.vscode-containers
+ms-azuretools.vscode-docker
+ms-ceintl.vscode-language-pack-pt-br
+ms-vscode-remote.remote-containers
+ms-vscode.live-server
+ritwickdey.liveserver

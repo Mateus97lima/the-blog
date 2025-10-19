@@ -5,11 +5,12 @@
 
 
 import { revalidateTag } from 'next/cache';
-import { getZodErrorMessages } from '../../../utils/get-zod-error-messagens';
+import { getZodErrorMessages } from '../../utils/get-zod-error-messagens';
 import { postRepository } from '@/repositories/Post';
 import { PostUpdateSchema } from '@/lib/post/validation';
 import { makePartialPublicPost, makePublicPostFromDb, publicPost } from '@/dto/post/dto';
-import { makeRandomString } from '../../../utils/make-random-string';
+import { makeRandomString } from '../../utils/make-random-string';
+import { verifyLoginSession } from '@/lib/login/manage_login';
 
 type UpdatePostActionState = {
   formState: publicPost;
@@ -21,7 +22,8 @@ export async function updatePostAction(
   prevState: UpdatePostActionState,
   formData: FormData,
 ): Promise<UpdatePostActionState> {
-  // TODO: verificar se o usuário tá logado
+
+const isAuthenticated = await verifyLoginSession()
 
   if (!(formData instanceof FormData)) {
     return {
@@ -41,6 +43,13 @@ export async function updatePostAction(
 
   const formDataToObj = Object.fromEntries(formData.entries());
   const zodParsedObj = PostUpdateSchema.safeParse(formDataToObj);
+
+  if(!isAuthenticated){
+    return{
+        formState:makePartialPublicPost(formDataToObj),
+        errors:['Faça seu login em outra aba antes de salvar.']
+    }
+}
 
   if (!zodParsedObj.success) {
     const errors = getZodErrorMessages(zodParsedObj.error.format());

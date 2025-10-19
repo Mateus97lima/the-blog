@@ -2,7 +2,7 @@
 
 import sanitizeHtml from 'sanitize-html';
 import { z } from 'zod';
-import { isUrlOrRelativePath } from '../../../utils/is-url-or-relative-path';
+import { isUrlOrRelativePath } from '../../utils/is-url-or-relative-path';
 
 const PostBaseSchema = z.object({
   title: z

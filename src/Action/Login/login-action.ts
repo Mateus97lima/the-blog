@@ -1,5 +1,12 @@
-import { verifyPassword } from '@/lib/login/manage_login';
-import { asyncDelay } from '../../../utils/async-delay';
+'use server'
+
+import { createLoginSession, verifyPassword } from '@/lib/login/manage_login';
+import { asyncDelay } from '../../utils/async-delay';
+import { redirect } from 'next/navigation';
+
+
+
+
 
 type loginActionState = {
   username: string;
@@ -7,6 +14,15 @@ type loginActionState = {
 };
 
 export async function loginAction(state: loginActionState, formdata: FormData) {
+const allowLogin = Boolean(Number(process.env.ALLOW_LOGIN))
+
+if(!allowLogin){
+    return{
+        username:'',
+        error:'Login not allowed',
+    }
+}
+
   await asyncDelay(5000);
   if (!(formdata instanceof FormData)) {
     return {
@@ -36,8 +52,12 @@ export async function loginAction(state: loginActionState, formdata: FormData) {
     }
   }
 // TODO: abaixo
-  return {
-    username: '',
-    error: 'USUÁRIO LOGADO COM SUCESSO',
-  };
+await createLoginSession (username)
+
+redirect('/admin/post')
+
 }
+
+
+
+

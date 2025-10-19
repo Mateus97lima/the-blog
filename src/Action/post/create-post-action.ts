@@ -2,14 +2,15 @@
 
 import { makePartialPublicPost, publicPost } from "@/dto/post/dto";
 import { PostCreateSchema } from "@/lib/post/validation";
-import { getZodErrorMessages } from "../../../utils/get-zod-error-messagens";
+import { getZodErrorMessages } from "../../utils/get-zod-error-messagens";
 import { PostModel } from "@/models/post/Post-Model";
 import {v4 as uuidV4} from 'uuid'
-import { markeSlugText as makeSlugText } from "../../../utils/marke-slug-text";
+import { markeSlugText as makeSlugText } from "../../utils/marke-slug-text";
 
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { postRepository } from "@/repositories/Post";
+import { verifyLoginSession } from "@/lib/login/manage_login";
 
 
 type createPostActionState = {
@@ -21,7 +22,8 @@ type createPostActionState = {
 }
 
 export async function createPostAction(prevState:createPostActionState , formaData:FormData):Promise<createPostActionState> {
-//TODO: verificar se o úsuario ta logado
+
+const isAuthenticated = await verifyLoginSession()
 
 if(!(formaData instanceof FormData)){
      return {
@@ -32,6 +34,13 @@ if(!(formaData instanceof FormData)){
 
 const formDataToObj = Object.fromEntries(formaData.entries()) ;
 const zodParsedObj = PostCreateSchema.safeParse(formDataToObj)
+
+if(!isAuthenticated){
+    return{
+        formState:makePartialPublicPost(),
+        errors:['Faça seu login em outra aba antes de salvar.']
+    }
+}
 
 if(!zodParsedObj.success){
     const errors = getZodErrorMessages(zodParsedObj.error.format())

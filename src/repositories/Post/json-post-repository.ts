@@ -2,7 +2,7 @@ import { PostModel } from '@/models/post/Post-Model';
 import { PostRepository } from './Post-Repository';
 import { resolve } from 'path';
 import { readFile, writeFile } from 'fs/promises';
-import { logColor } from '../../../utils/log-color';
+import { logColor } from '../../utils/log-color';
 
 const SimulateWaitMs = Number(process.env.SIMULATE_WAIT_IN_MS) || 0;
 

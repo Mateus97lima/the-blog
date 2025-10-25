@@ -1,15 +1,13 @@
-import { hashPassword } from "../lib/login/manage_login";
-
-
-
+import { hashPassword } from "@/lib/login/manage_login";
 
 (async () => {
-  const minhaSenha = '1234'; // NÃO ESQUECER DE APAGAR SUA SENHA DAQUI
+  const minhaSenha = ''; // SUA SENHA AQUI
   const hashDaSuaSenhaEmBase64 = await hashPassword(minhaSenha);
 
-  console.log({ hashDaSuaSenhaEmBase64 });
+  console.log('=== HASH GERADO ===');
+  console.log('Senha:', minhaSenha);
+  console.log('Hash Base64:', hashDaSuaSenhaEmBase64);
+  console.log('===================');
 })();
-
-
 
 

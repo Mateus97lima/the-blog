@@ -1,8 +1,11 @@
 'use server'
 
 import { CreateUserSchema, PublicUserDto, PublicUserSchema } from "@/LIb/user/schemas"
+import { apiRequest } from "@/utils/api-request";
 import { asyncDelay } from "@/utils/async-delay";
 import { getZodErrorMessages } from "@/utils/get-zod-error-messagens";
+import { redirect } from "next/navigation";
+
 
 
 type CreateUserActionState = {  // estado da ação de criação do usuário
@@ -34,48 +37,23 @@ export async function createdUserAction(state: CreateUserActionState, formadata:
         }
      }
 
-     // ApiFecth para criar o usuário//
-
-     const ApiUrl = process.env.API_URL || 'http://localhost:3001';
-     
-
-     try {
-          const response = await fetch(`${ApiUrl}/user`, {
+     const createResponse = await apiRequest<PublicUserDto>('/user', {  // faz a requisição para criar o usuário//
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(parsedFormData.data),
-     })
-
-     const json = await response.json();
-
-      if(!response.ok){
-        console.log(json)
-          return {
-            user: PublicUserSchema.parse(formObject),// mantém o usuário atual
-            errors: json.message || ['Erro ao criar o usuário'],
-            success: false // sucesso na criação de usuário
-        }
-      }
-    console.log(json)
-        return {
-            user: PublicUserSchema.parse(formObject),// mantém o usuário atual
-            errors:['Sucesso ao criar o usuário'],
-            success: true // sucesso na criação de usuário
-        }
-
-     } catch (e) {
-        console.log(e);
-             return {
-            user: PublicUserSchema.parse(formObject),// mantém o usuário atual
-            errors: ['Falha ao se conectar com o servidor'],
-            success: false // falha na criação de usuário
-        }
-     }
+            'content-type' : 'application/json'
+     },
+       body: JSON.stringify(parsedFormData.data)
 
 
+});
 
+if(!createResponse.success){
+    return {
+        user: PublicUserSchema.parse(formObject), // tenta manter os dados atuais do usuário//
+        errors: createResponse.errors,
+        success: false
+    }
+}
 
-
+redirect('/login?created=1');
 }

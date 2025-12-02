@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Button } from '../Button';
 import { useActionState, useEffect } from 'react';
 import { createdUserAction } from '@/Action/user/created-user-action';
-import { PublicUserSchema } from '@/LIb/user/schemas';
+import { PublicUserSchema } from '@/lib/user/schemas';
 import { toast } from 'react-toastify';
 
 export function CreateUserForm() {

@@ -6,6 +6,8 @@ import { InputText } from "@/components/InputText";
 import clsx from "clsx";
 import { LogInIcon } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
 
@@ -14,17 +16,40 @@ import { toast } from "react-toastify";
 
 
 export  function LoginForm() {
-  const initialState = { username: "", error: "" };
+  const initialState = { email: "", errors: [] };
 
   const [state, action, isPending] = useActionState(loginAction, initialState);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const userChanged = searchParams.get('userChanged');
+  const created = searchParams.get('created');
 
   useEffect(() => {
-    if (state.error) {
+    if (state.errors.length > 0) {
       toast.dismiss();
-      toast.error(state.error);
-      console.error(state.error);
+      state.errors.forEach(e => toast.error(e));
+
+
     }
   }, [state]);
+
+    useEffect(() => {
+    if (userChanged === '1') {
+      toast.dismiss();
+      toast.success('Seu usuário foi modificado. Faça login novamente.');
+      const url = new URL(window.location.href);
+      url.searchParams.delete('userChanged');
+      router.replace(url.toString());
+    }
+
+    if (created === '1') {
+      toast.dismiss();
+      toast.success('Seu usuário criado.');
+      const url = new URL(window.location.href);
+      url.searchParams.delete('created');
+      router.replace(url.toString());
+    }
+  }, [userChanged, created, router]);
 
   return (
     <div
@@ -35,11 +60,12 @@ export  function LoginForm() {
     >
       <form action={action} className="flex-1 flex flex-col gap-6 ">
         <InputText
-          type="text"
-          name="username"
-          labelText="Usuário"
-          placeholder="Seu usuário"
-          defaultValue={state.username}
+          type="email"
+          name="email"
+          labelText="email"
+          placeholder="Seu e-mail"
+          defaultValue={state.email}
+          required
           disabled={isPending}
         />
 
@@ -48,6 +74,7 @@ export  function LoginForm() {
           name="password"
           labelText="Senha"
           placeholder="Sua senha"
+          required
           disabled={isPending}
         />
 
@@ -59,10 +86,6 @@ export  function LoginForm() {
         <p className='text-sm/tight'>
           <Link href='/user/new'>Criar minha conta</Link>
         </p>
-
-        {!!state.error && (
-          <p className="text-red-600 text-sm">{state.error}</p>
-        )}
       </form>
     </div>
   );

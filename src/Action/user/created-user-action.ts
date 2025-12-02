@@ -1,6 +1,6 @@
 'use server'
 
-import { CreateUserSchema, PublicUserDto, PublicUserSchema } from "@/LIb/user/schemas"
+import { CreateUserSchema, PublicUserDto, PublicUserSchema } from "@/lib/user/schemas"
 import { apiRequest } from "@/utils/api-request";
 import { asyncDelay } from "@/utils/async-delay";
 import { getZodErrorMessages } from "@/utils/get-zod-error-messagens";
@@ -14,8 +14,8 @@ type CreateUserActionState = {  // estado da ação de criação do usuário
     success: boolean
 }
 
-export async function createdUserAction(state: CreateUserActionState, formadata: FormData): Promise<CreateUserActionState> {
-    if(!(formadata instanceof FormData)){
+export async function createdUserAction(state: CreateUserActionState, formdata: FormData): Promise<CreateUserActionState> {
+    if(!(formdata instanceof FormData)){
         return {
             user: state.user,// mantém o usuário atual
             errors: ['Dados inválidos'],
@@ -26,7 +26,7 @@ export async function createdUserAction(state: CreateUserActionState, formadata:
 
     }
     await asyncDelay(3000)
-     const formObject = Object.fromEntries(formadata.entries());
+     const formObject = Object.fromEntries(formdata.entries());
      const parsedFormData = CreateUserSchema.safeParse(formObject);
 
      if(!parsedFormData.success){

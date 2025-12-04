@@ -3,6 +3,7 @@
 import sanitizeHtml from 'sanitize-html';
 import { z } from 'zod';
 import { isUrlOrRelativePath } from '../../utils/is-url-or-relative-path';
+import { PublicUserSchema } from '../user/schemas';
 
 const PostBaseSchema = z.object({
   title: z
@@ -49,3 +50,31 @@ export const PostCreateSchema = PostBaseSchema;
 export const PostUpdateSchema = PostBaseSchema.extend({
   // id: z.string().uuid('ID inválido'),
 });
+
+export const CreatePostForApiSchemas = PostBaseSchema.omit({
+ author: true,
+ published: true,
+}).extend({});
+
+export const UpdatePostForApiSchemas = PostBaseSchema.omit({
+    author: true,
+}).extend({});
+
+export const PublicPostForApiSchema = PostBaseSchema.extend({
+  id: z.string().default(''),
+  slug: z.string().default(''),
+  title: z.string().default(''),
+  excerpt: z.string().default(''),
+  author: PublicUserSchema.optional().default({
+    id: '',
+    email: '',
+    name: '',
+  }),
+  content: z.string().default(''),
+  coverImageUrl: z.string().default(''),
+  createdAt: z.string().default(''),
+});
+
+export type CreatePostForApiDto = z.infer<typeof CreatePostForApiSchemas>; //tipo para criar post viar Api//
+export type UpdatePostForApiDto = z.infer<typeof UpdatePostForApiSchemas>; //tipo para atualizar post via Api//
+export type PublicPostForApiDto = z.infer<typeof PublicPostForApiSchema>; //tipo para representar post Público via Api//

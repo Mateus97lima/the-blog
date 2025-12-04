@@ -8,15 +8,15 @@ import { useActionState, useEffect } from 'react';
 import { useState } from 'react';
 import { ImageUploader } from '../ImageUploader';
 
-import { makePartialPublicPost, publicPost } from '@/dto/post/dto';
 import { createPostAction } from '@/Action/post/create-post-action';
 import { toast } from 'react-toastify';
 import { updatePostAction } from '@/Action/post/uptade-Post-action';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { PublicPostForApiDto, PublicPostForApiSchema } from '@/lib/post/schemas';
 
 type ManagePostUpdateFormProps = {
     mode:'update';
-  publicPost?: publicPost;
+  publicPost:PublicPostForApiDto;
 };
 
 type ManagePostFormCreateProps = {
@@ -45,7 +45,7 @@ export function ManagePostForm(props: ManagePostFormProps) {
   };
 
   const initialState = {
-    formState: makePartialPublicPost(publicPost),
+    formState: PublicPostForApiSchema.parse(publicPost || {}),
     errors: [],
   };
 
@@ -108,15 +108,6 @@ export function ManagePostForm(props: ManagePostFormProps) {
         />
 
         <InputText
-          labelText='Autor'
-          name='author'
-          placeholder='Digite o nome do autor'
-          type='text'
-            disabled={isPending}
-          defaultValue={formState.author}
-        />
-
-        <InputText
           labelText='Título'
           name='title'
           placeholder='Digite o título'
@@ -153,6 +144,8 @@ export function ManagePostForm(props: ManagePostFormProps) {
             disabled={isPending}
         />
 
+        {mode === 'update' &&
+
         <Inputcheckbox
           labeltext='Publicar?'
           name='published'
@@ -160,6 +153,7 @@ export function ManagePostForm(props: ManagePostFormProps) {
           defaultChecked={formState.published}
             disabled={isPending}
         />
+        }
 
         <div className='mt-4 py-4 px-6'>
           <Button type='submit' className='text-2xl'   disabled={isPending}>

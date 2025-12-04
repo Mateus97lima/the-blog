@@ -1,21 +1,16 @@
 'use server';
 
-import { makePartialPublicPost, publicPost } from "@/dto/post/dto";
-import { PostCreateSchema } from "@/lib/post/validation";
+import { CreatePostForApiSchemas, PublicPostForApiDto, PublicPostForApiSchema } from "@/lib/post/schemas";
 import { getZodErrorMessages } from "../../utils/get-zod-error-messagens";
-import { PostModel } from "@/models/post/Post-Model";
-import {v4 as uuidV4} from 'uuid'
-import { markeSlugText as makeSlugText } from "../../utils/marke-slug-text";
-
-import { revalidateTag } from "next/cache";
+import { getLoginSessionFormApi } from "@/lib/login/manage_login";
+import { authenticatedApiRequest } from "@/utils/authenticated-api-request";
 import { redirect } from "next/navigation";
-import { postRepository } from "@/repositories/Post";
-import { verifyLoginSession } from "@/lib/login/manage_login";
+import { revalidateTag } from "next/cache";
 
 
 type createPostActionState = {
      success?: string;
-    formState:publicPost;
+    formState:PublicPostForApiDto;
     errors:string[];
 
 
@@ -23,7 +18,7 @@ type createPostActionState = {
 
 export async function createPostAction(prevState:createPostActionState , formaData:FormData):Promise<createPostActionState> {
 
-const isAuthenticated = await verifyLoginSession()
+const isAuthenticated = await getLoginSessionFormApi() //
 
 if(!(formaData instanceof FormData)){
      return {
@@ -33,11 +28,11 @@ if(!(formaData instanceof FormData)){
 }
 
 const formDataToObj = Object.fromEntries(formaData.entries()) ;
-const zodParsedObj = PostCreateSchema.safeParse(formDataToObj)
+const zodParsedObj = CreatePostForApiSchemas.safeParse(formDataToObj)
 
 if(!isAuthenticated){
     return{
-        formState:makePartialPublicPost(),
+        formState:PublicPostForApiSchema.parse(formDataToObj),
         errors:['Faça seu login em outra aba antes de salvar.']
     }
 }
@@ -47,40 +42,36 @@ if(!zodParsedObj.success){
 
     return {
         errors,
-        formState:makePartialPublicPost(),
+        formState:PublicPostForApiSchema.parse(formDataToObj),
     }
 }
 
-const validPostZod = zodParsedObj.data;
-const newPost: PostModel ={
-    ...validPostZod,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    id:uuidV4(),
-    slug: makeSlugText(validPostZod.title)
+const newPost = zodParsedObj.data;
 
+  const createPostResponse = await authenticatedApiRequest<PublicPostForApiDto>(
+    `/post/me`,
+    {
+      method: 'Post',
+        headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newPost),
+    },
+  );
 
-};
-
-try{
-    await postRepository.create(newPost)
-}catch(e: unknown){
-     if (e instanceof Error) {
+  if(!createPostResponse.success) {
     return {
-        formState:newPost,
-        errors:[e.message],
-    }
-}
-return {
-    formState:newPost,
-    errors:['Error desconhecido']
-}
+        formState: PublicPostForApiSchema.parse(formDataToObj),
+        errors: createPostResponse.errors
+    };
+  }
 
-}
+  const createdPost =createPostResponse.data
+
 
 console.log('criado com sucesso')
  revalidateTag('post')
- redirect(`/admin/post/${newPost.id}?create=1`)
+ redirect(`/admin/post/${createdPost.id}?create=1`)
 
 }
 

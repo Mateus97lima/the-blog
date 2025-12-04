@@ -39,6 +39,7 @@ export function MarkdownEditor({
           if (value === undefined) return;
           setValue(value);
         }}
+        data-color-mode='light'
         height={400}
         extraCommands={[]}
         preview='edit'

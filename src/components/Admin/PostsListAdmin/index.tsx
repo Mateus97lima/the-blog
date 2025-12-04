@@ -4,16 +4,29 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { AdminButtonDelete } from '../AdminButtonDelete';
 import ErrorMessage from '../../ErrorMessage';
-import { findAllPostAdmin } from '@/lib/post/queries/admin';
+import {  findAllPostFromApiAdmin } from '@/lib/post/queries/admin';
 
 export async function PostsListAdmin() {
-  const posts = await findAllPostAdmin();
+  const postsRes = await findAllPostFromApiAdmin();
 
-  console.log('POSTS', posts);
+   if (!postsRes.success) {
+    console.log(postsRes.errors);
 
-  if (posts.length <= 0)
-    return <ErrorMessage contentTitle='ei' content='Bora criar algum post' />;
+    return (
+      <ErrorMessage
+        contentTitle='Ei 😅'
+        content='Tente fazer login novamente'
+      />
+    );
+  }
 
+  const posts = postsRes.data;
+
+  if (posts.length <= 0) {
+    return (
+         <ErrorMessage contentTitle='ei' content='Bora criar algum post' />
+    );
+  }
   return (
     <div className='mb-16 text-3xl '>
       {posts.map(post => {

@@ -4,10 +4,10 @@
 
 
 import { createLoginSessionFromApi } from '@/lib/login/manage_login';
-import { loginSchema } from '@/lib/login/schemas';  
+import { loginSchema } from '@/lib/login/schemas';
 import { apiRequest } from '@/utils/api-request';
-import { asyncDelay } from '@/utils/async-delay';
 import { getZodErrorMessages } from '@/utils/get-zod-error-messagens';
+import { VerifyHoneyInput } from '@/utils/verify-honey-input';
 import { redirect } from 'next/navigation'
 
 
@@ -29,7 +29,15 @@ export async function loginAction(state: LoginActionState, formData: FormData) {
     };
   }
 
-  await asyncDelay(2000); // Reduzi para 2s para testes
+
+  const isBot = await VerifyHoneyInput(formData, 5000)
+
+  if(isBot) {
+    return {
+        email: '',
+        errors: ['nice']
+    }
+  }
 
   if(!(formData instanceof FormData)){
     return {

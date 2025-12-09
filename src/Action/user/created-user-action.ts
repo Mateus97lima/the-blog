@@ -4,6 +4,7 @@ import { CreateUserSchema, PublicUserDto, PublicUserSchema } from "@/lib/user/sc
 import { apiRequest } from "@/utils/api-request";
 import { asyncDelay } from "@/utils/async-delay";
 import { getZodErrorMessages } from "@/utils/get-zod-error-messagens";
+import { VerifyHoneyInput } from "@/utils/verify-honey-input";
 import { redirect } from "next/navigation";
 
 
@@ -15,6 +16,17 @@ type CreateUserActionState = {  // estado da ação de criação do usuário
 }
 
 export async function createdUserAction(state: CreateUserActionState, formdata: FormData): Promise<CreateUserActionState> {
+
+  const isBot = await VerifyHoneyInput(formdata, 5000)
+
+  if(isBot){
+    return {
+        user: state.user,
+        errors: ['nice'],
+        success: false,
+    }
+  }
+
     if(!(formdata instanceof FormData)){
         return {
             user: state.user,// mantém o usuário atual

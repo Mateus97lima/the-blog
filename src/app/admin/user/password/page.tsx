@@ -1,5 +1,6 @@
 
 import { SpinLoader } from "@/components/SpinLoader";
+import { UpdateUser } from "@/components/UpdateUser";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -13,7 +14,7 @@ title: 'Trocar senha',
 export default async function AdminUserPage() {
 return (
     <Suspense fallback={<SpinLoader className="mb-16"/>}>
-        <h1>Update password Form</h1>
+        <UpdateUser/>
     </Suspense>
 )
 }

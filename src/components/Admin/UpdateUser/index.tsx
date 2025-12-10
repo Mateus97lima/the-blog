@@ -1,6 +1,6 @@
 import { getPublicUserFromApi } from "@/lib/user/Api/get-user";
-import { UpdateUserForm } from "../Admin/UpdateUserForm";
-import ErrorMessage from "../ErrorMessage";
+import { UpdateUserForm } from "../UpdateUserForm";
+import ErrorMessage from "../../ErrorMessage";
 
 
 export async function UpdateUser () {

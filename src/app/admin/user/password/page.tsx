@@ -1,6 +1,6 @@
 
 import { SpinLoader } from "@/components/SpinLoader";
-import { UpdateUser } from "@/components/UpdateUser";
+import { UpdateUser } from "@/components/Admin/UpdateUser";
 import { Metadata } from "next";
 import { Suspense } from "react";
 

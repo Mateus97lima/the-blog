@@ -56,14 +56,15 @@ export  function LoginForm() {
     <div
       className={clsx(
         "flex items-center justify-center",
-        "text-center max-w-sm mt-18 mb-32 mx-auto"
+        "text-center max-w-sm mt-20 mb-32 mx-auto",'shadow-lg rounded-lg p-10'
       )}
     >
       <form action={action} className="flex-1 flex flex-col gap-6 ">
+        <h1 className='text-2xl font-bold mb-5 text-white font-sans'>Login</h1>
         <InputText
           type="email"
           name="email"
-          labelText="email"
+          labelText="E-mail"
           placeholder="Seu e-mail"
           defaultValue={state.email}
           required
@@ -86,7 +87,7 @@ export  function LoginForm() {
           Entrar
         </Button>
 
-        <p className='text-sm/tight'>
+        <p className='text-sm/tight text-slate-500 mt-4 hover:text-blue-500 transition'>
           <Link href='/user/new'>Criar minha conta</Link>
         </p>
       </form>

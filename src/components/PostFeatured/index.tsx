@@ -23,7 +23,7 @@ if(posts.length < 0) {  //Existir algum post se não noPostsFound//
 
 const post = posts[0];
 
-  const postLink = `/post/${post.slug}`;
+  const postLink = `/post/${post?.slug}`;
 
   return (
     <section className='grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group'>

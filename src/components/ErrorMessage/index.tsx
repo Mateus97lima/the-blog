@@ -23,7 +23,7 @@ export default function ErrorMessage({pageTitle='',content,contentTitle}:ErrorMe
         <div>
 
           <h1 className='text-7xl/normal font-bold mb-4'>{contentTitle}</h1>
-          <div className='text-2xl/'>
+          <div className='text-2xl/normal font-bold'>
             {content}
           </div>
         </div>

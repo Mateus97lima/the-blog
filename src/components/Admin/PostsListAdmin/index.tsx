@@ -24,7 +24,7 @@ export async function PostsListAdmin() {
 
   if (posts.length <= 0) {
     return (
-         <ErrorMessage contentTitle='ei' content='Bora criar algum post' />
+         <ErrorMessage contentTitle='Ei 😅' content='Bora criar algum post' />
     );
   }
   return (

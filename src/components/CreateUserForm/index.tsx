@@ -31,10 +31,13 @@ export function CreateUserForm() {
     <div
       className={clsx(
         'flex items-center justify-center',
-        'text-center max-w-sm mt-16 mb-32 mx-auto',
+        'text-center max-w-md mt-16 mb-32 mx-auto','shadow-lg rounded-lg p-10',
       )}
+
     >
+
       <form action={action} className='flex-1 flex flex-col gap-6'>
+        <h1 className='text-2xl font-bold mb-5 text-white font-sans'>Criar Conta</h1>
         <InputText
           type='text'
           name='name'
@@ -79,7 +82,7 @@ export function CreateUserForm() {
 
         </Button>
 
-        <p className='text-sm/tight'>
+        <p className='text-sm/tight text-slate-500 mt-4 hover:text-blue-300 transition'>
           <Link href='/login'>Já tem conta? Entrar</Link>
         </p>
       </form>

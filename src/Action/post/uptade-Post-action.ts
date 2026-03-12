@@ -78,8 +78,8 @@ const isAuthenticated = await getLoginSessionFormApi()
 
   const post = updatePostResponse.data;
 
-  revalidateTag('posts','max-age=0') // ISSO GARANTE QUE A PÁGINA DE LISTAGEM DE POSTS SEJA REVALIDADA IMEDIATAMENTE APÓS A AÇÃO DE ATUALIZAR O POST;
-  revalidateTag(`post-${post.slug}`, 'max-age=0');
+  revalidateTag('posts','max') // ISSO GARANTE QUE A PÁGINA DE LISTAGEM DE POSTS SEJA REVALIDADA IMEDIATAMENTE APÓS A AÇÃO DE ATUALIZAR O POST;
+  revalidateTag(`post-${post.slug}`, 'max');
 
   return {
     formState: PublicPostForApiSchema.parse(post),

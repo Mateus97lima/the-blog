@@ -26,7 +26,7 @@ const post = posts[0];
   const postLink = `/post/${post?.slug}`;
 
   return (
-    <section className='grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group'>
+    <section className='grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group '>
       <PostCoverImagem
         linkProps={{
           href: postLink,

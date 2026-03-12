@@ -19,7 +19,7 @@ export function  PostHeading ({children,url,as: Tag='h2'}:PostHeadingProps){
     const commonClasses = '';
     return(
           <Tag className={clsx(headingClasseMap[Tag],commonClasses)}>
-                <Link className="hover:text-slate-600 transition" href={url}>{children}</Link>
+                <Link className="font-bold/ligth hover:text-slate-600 transition" href={url}>{children}</Link>
 
             </Tag>
     )

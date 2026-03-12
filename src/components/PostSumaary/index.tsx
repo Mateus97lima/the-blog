@@ -19,7 +19,7 @@ export function PostSumary({
   excerpt,
 }: PostSumaryProps) {
   return (
-    <div className=' flex flex-col gap-4 sm:justify-center'>
+    <div className=' flex flex-col gap-4 sm:justify-center '>
       <PostDate dateTime={createdAt}/>
 
       <PostHeading as={postHeading} url={postLink}>

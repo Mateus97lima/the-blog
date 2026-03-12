@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { revalidateTag } from "next/cache";
 
 
+
 type createPostActionState = {
      success?: string;
     formState:PublicPostForApiDto;
@@ -70,7 +71,7 @@ const newPost = zodParsedObj.data;
 
 
 console.log('criado com sucesso')
- revalidateTag('post')
+ revalidateTag('post','max-age=0') // ISSO GARANTE QUE A PÁGINA DE LISTAGEM DE POSTS SEJA ATUALIZADA COM O NOVO POST CRIADO
  redirect(`/admin/post/${createdPost.id}?create=1`)
 
 }

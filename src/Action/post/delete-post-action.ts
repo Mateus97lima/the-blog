@@ -58,8 +58,8 @@ const isAuthenticated = await getLoginSessionFormApi()
     }
   }
 
-  revalidateTag('post')
-  revalidateTag(`post-${postResponse.data.slug}`);
+  revalidateTag('post', 'max-age=0') // ISSO GARANTE QUE A PÁGINA SEJA REVALIDADA IMEDIATAMENTE APÓS A AÇÃO DELETAR O POST
+  revalidateTag(`post-${postResponse.data.slug}`, 'max-age=0') // ISSO GARANTE QUE A PÁGINA DE DETALHES DO POST SEJA REVALIDADA IMEDIATAMENTE APÓS A AÇÃO DELETAR O POST, CASO EXISTA;
 
 
   return {

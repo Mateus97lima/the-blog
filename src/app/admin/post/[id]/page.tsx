@@ -1,5 +1,6 @@
 import { ManagePostForm } from '@/components/Admin/ManagePostForm';
-import {  findPostByIdFromApiAdmin } from '@/lib/post/queries/admin';
+import { findPostByIdFromApiAdmin } from '@/lib/post/queries/admin';
+
 import { PublicPostForApiSchema } from '@/lib/post/schemas';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';

@@ -3,9 +3,8 @@ import { postRepository } from "@/repositories/Post";
 import { authenticatedApiRequest } from "@/utils/authenticated-api-request";
 import { cache } from "react";
 
-export const findPostByIdAdmin = cache(
-  async (id: string) => {
-    return await postRepository.findById(id)
+export const findPostByIdAdmin = cache(async (id: string) => {
+ return await postRepository.findById(id);
 });
 
 export const findPostByIdFromApiAdmin = cache(async (id: string) => {

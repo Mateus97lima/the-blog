@@ -6,9 +6,9 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "dist-scripts",
-    "baseUrl": ".",              // 👈 precisa disso
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]           // 👈 ajustei para combinar com a pasta real
+      "@/*": ["src/*"]          
     }
   },
   "include": ["utils/**/*.ts"]

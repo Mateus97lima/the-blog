@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+📖 The Blog
 
-## Getting Started
+O The Blog é um projeto que desenvolvi com o objetivo de praticar e evoluir minhas habilidades em desenvolvimento front-end, utilizando tecnologias modernas como React e Next.js.
 
-First, run the development server:
+A ideia foi construir um blog completo, simulando um cenário real de aplicação, com integração entre front-end, back-end e banco de dados.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🚀 Tecnologias utilizadas
+⚛️ React
+▲ Next.js
+🎨 Tailwind CSS
+🟨 JavaScript
+🗄️ SQL (consumido via API no back-end)
+💻 Sobre o projeto
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Esse projeto é o front-end da aplicação, responsável por toda a interface e experiência do usuário.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+A aplicação permite:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Visualizar uma lista de posts
+Acessar páginas individuais de cada artigo
+Navegação rápida e otimizada com Next.js
+Interface responsiva e moderna com Tailwind
 
-## Learn More
+Além disso, o sistema conta com integração com autenticação de usuários, que é gerenciada pelo back-end.
 
-To learn more about Next.js, take a look at the following resources:
+🎯 Objetivo do projeto
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Desenvolvi esse projeto com foco em:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Evoluir na construção de aplicações com React e Next.js
+Praticar boas práticas de organização de código
+Trabalhar com componentização
+Melhorar a criação de interfaces utilizando Tailwind CSS
+Entender melhor a integração entre front-end, back-end e banco de dados
+🧠 Principais aprendizados
 
-## Deploy on Vercel
+Durante o desenvolvimento, consegui evoluir bastante em:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Estrutura de projetos com Next.js
+Renderização (SSR e CSR)
+Consumo de APIs
+Organização de componentes
+Responsividade
+Integração com autenticação
